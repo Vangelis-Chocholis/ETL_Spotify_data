@@ -1,4 +1,10 @@
-
-2023-12-29 19:09:52,378 - ERROR - An exception occurred: get artist_ids, album_ids, track_ids lists
-2023-12-29 19:09:52,378 - ERROR - An exception occurred: Load data into DB
-2023-12-29 19:12:34,984 - INFO - Code executed successfully!
+2023-12-29 20:14:25,681 - ERROR - An exception occurred: get artist_ids, album_ids, track_ids lists
+2023-12-29 20:14:25,681 - ERROR - An exception occurred: Load data into DB
+2023-12-29 20:14:53,609 - ERROR - An exception occurred: get artist_ids, album_ids, track_ids lists
+2023-12-29 20:14:53,609 - ERROR - An exception occurred: Load data into DB
+2023-12-29 20:15:23,292 - INFO - Code executed successfully!
+2023-12-29 20:34:52,922 - INFO - Code executed successfully!
+2023-12-29 20:44:07,583 - INFO - Code executed successfully!
+2023-12-29 20:48:03,842 - INFO - Code executed successfully!
+2023-12-29 20:55:35,405 - INFO - Code executed successfully!
+2023-12-29 20:56:15,777 - INFO - Code executed successfully!

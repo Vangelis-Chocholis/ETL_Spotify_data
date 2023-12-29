@@ -1,13 +1,13 @@
 
 import sqlalchemy
 import pandas as pd
+import time
 from dotenv import load_dotenv
 import os
 import logging
 import logging.handlers
 # imort functions to extract dat from Spotify API
 from extract_transform_data import extract_artists_followers_table, extract_artists_popularity_table, extract_albums_popularity_table, extract_tracks_popularity_table
-
 
 
 # Configure the logging setup
@@ -23,16 +23,39 @@ try:
     #password = os.getenv("PASSWORD")
     password = os.environ["PASSWORD"]
     # set connection string
-    connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:spotifyrockdb.database.windows.net,1433;Database=SpotifyRockDB;Uid=sqladmin;Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=2000;'
+    connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid=sqladmin;Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=2000;'
 except Exception as e:
     logging.error("An exception occurred: Database PASSWORD not found", exc_info=False)
                                                                     
-                                
-try:
-    # Using SQLAlcehmy engine to load data with pandas                   
-    engine = sqlalchemy.create_engine(f'mssql+pyodbc:///?odbc_connect={connection_string}')
 
-    # get artist_ids, album_ids, track_ids lists
+
+# set SQLAlchemy engine
+def set_engine(connection_string, max_retries=3, retry_delay=5):
+    attempts = 0
+    while attempts < max_retries:
+        try:
+            engine = sqlalchemy.create_engine(f'mssql+pyodbc:///?odbc_connect={connection_string}')
+            return engine
+        except Exception as e:
+            logging.error(f"An exception occurred: SQLAlcehmy engine error (Attempt {attempts + 1}/{max_retries})", exc_info=False)
+            attempts += 1
+            time.sleep(retry_delay)
+
+    logging.error(f"Failed to create the SQLAlchemy engine after {max_retries} attempts.", exc_info=False)
+    return None
+
+
+# get artist_ids, album_ids, track_ids lists
+def get_spotify_ids(engine):
+    """This functions query the database, and returns a tuple of lists,
+    with artist/album/track ids to make data update
+
+    Args:
+        engine (SQLAlchemy engine)
+
+    Returns:
+        SQLAlchemy engine: the engine to pass in the functions later on
+    """
     try:
         query = f'SELECT artist_id FROM artists_table'
         artist_ids = pd.read_sql(query, engine)['artist_id'].to_list() 
@@ -45,10 +68,21 @@ try:
     except Exception as e:
         # Log the exception with the logging module
         logging.error("An exception occurred: get artist_ids, album_ids, track_ids lists", exc_info=False)
-        
+    return artist_ids #, album_ids, track_ids 
+    
+ 
+# Load
+def load_to_database(engine, tuple_ids):
+    """Extracts new data from Spotify API, and load them into the database
 
-    # Load into DB
+    Args:
+        engine (SQLAlchemy engine)
+        tupl_ids (tuple): tuple of lists of spotify ids
+    """      
     try:
+        artist_ids = tuple_ids
+        #artist_ids, album_ids, track_ids = tuple_ids
+        
         #df_artists_followers_table = extract_artists_followers_table(artist_ids=artist_ids)
         #df_artists_followers_table.to_sql('artists_followers_table', con=engine, if_exists='append', index=False)
 
@@ -61,25 +95,28 @@ try:
         #df_tracks_popularity_table = extract_tracks_popularity_table(track_ids=track_ids)
         #df_tracks_popularity_table.to_sql('tracks_popularity_table', con=engine, if_exists='append', index=False)
 
+        # close SQLAlchemy engine
+        engine.dispose()
         # Add a logging statement for successful completion
         logging.info("Code executed successfully!")
     except Exception as e:
         # Log the exception with the logging module
         logging.error("An exception occurred: Load data into DB", exc_info=False)
 
-    # close SQLAlchemy engine
-    engine.dispose()
-except Exception as e:
-    logging.error("An exception occurred: SQLAlcehmy engine error", exc_info=False)
+
+
+# Run fucntions
+engine = set_engine(connection_string)
+tuple_ids = get_spotify_ids(engine)
+load_to_database(engine, tuple_ids)
 
 
 
 
-
-
+'''
 #########
 ### CREATING DEMO TABLE to test code
-'''
+
 import pypyodbc as odbc
 conn = odbc.connect(connection_string)
 
