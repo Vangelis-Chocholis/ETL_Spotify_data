@@ -8,3 +8,5 @@
 2023-12-29 20:48:03,842 - INFO - Code executed successfully!
 2023-12-29 20:55:35,405 - INFO - Code executed successfully!
 2023-12-29 20:56:15,777 - INFO - Code executed successfully!
+2023-12-29 22:09:17,545 - ERROR - An exception occurred: get artist_ids, album_ids, track_ids lists
+2023-12-29 22:09:17,545 - ERROR - An exception occurred: Load data into DB
