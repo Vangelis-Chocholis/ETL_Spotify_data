@@ -49,7 +49,7 @@ def set_engine(connection_string, max_retries=5, retry_delay=5):
 # get artist_ids, album_ids, track_ids lists
 def get_spotify_ids(engine):
     attempts = 0
-    max_retries = 5
+    max_retries = 2
     retry_delay = 5
     while attempts < max_retries:
         try:
