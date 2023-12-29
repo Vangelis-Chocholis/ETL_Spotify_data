@@ -10,3 +10,10 @@
 2023-12-29 20:56:15,777 - INFO - Code executed successfully!
 2023-12-29 22:09:17,545 - ERROR - An exception occurred: get artist_ids, album_ids, track_ids lists
 2023-12-29 22:09:17,545 - ERROR - An exception occurred: Load data into DB
+2023-12-29 22:33:44,443 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 1/5)
+2023-12-29 22:33:49,449 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 2/5)
+2023-12-29 22:33:54,450 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 3/5)
+2023-12-29 22:33:59,456 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 4/5)
+2023-12-29 22:34:04,461 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 5/5)
+2023-12-29 22:34:09,467 - ERROR - Failed to get Spotify ids  after 5 attempts.
+2023-12-29 22:34:09,467 - ERROR - An exception occurred: Load data into DB
