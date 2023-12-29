@@ -8,3 +8,6 @@
 2023-12-29 20:48:03,842 - INFO - Code executed successfully!
 2023-12-29 20:55:35,405 - INFO - Code executed successfully!
 2023-12-29 20:56:15,777 - INFO - Code executed successfully!
+2023-12-30 00:21:30,670 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 1/3)
+2023-12-30 00:21:50,902 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 2/3)
+2023-12-30 00:22:11,452 - INFO - Code executed successfully!
