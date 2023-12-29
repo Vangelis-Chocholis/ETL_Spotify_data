@@ -65,10 +65,11 @@ def get_spotify_ids(engine):
 
         #query = f'SELECT track_id FROM tracks_table'
         #track_ids = pd.read_sql(query, engine)['track_id'].to_list()
+        return artist_ids #, album_ids, track_ids 
     except Exception as e:
         # Log the exception with the logging module
         logging.error("An exception occurred: get artist_ids, album_ids, track_ids lists", exc_info=False)
-    return artist_ids #, album_ids, track_ids 
+    
     
  
 # Load
