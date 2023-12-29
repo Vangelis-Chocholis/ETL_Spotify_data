@@ -185,3 +185,7 @@ sqlalchemy.exc.DBAPIError: (pyodbc.Error) ('01000', "[01000] [unixODBC][Driver M
 (Background on this error at: https://sqlalche.me/e/20/dbapi)
 2023-12-29 23:10:03,386 - ERROR - Failed to get Spotify ids  after 2 attempts.
 2023-12-29 23:10:03,386 - ERROR - An exception occurred: Load data into DB
+2023-12-29 23:34:15,671 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 1/2)
+2023-12-29 23:34:20,677 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 2/2)
+2023-12-29 23:34:25,682 - ERROR - Failed to get Spotify ids  after 2 attempts.
+2023-12-29 23:34:25,682 - ERROR - An exception occurred: Load data into DB
