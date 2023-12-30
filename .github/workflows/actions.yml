@@ -40,9 +40,21 @@ jobs:
               
       - name: Create Symbolic Links
         run: |
-          # Create symbolic links to ODBC configuration files
-          sudo ln -s /usr/local/etc/odbcinst.ini /etc/odbcinst.ini
-          sudo ln -s /usr/local/etc/odbc.ini /etc/odbc.ini
+          # Check if symbolic links already exist
+          if [ ! -e /etc/odbcinst.ini ]; then
+            sudo ln -s /usr/local/etc/odbcinst.ini /etc/odbcinst.ini
+          else
+            sudo rm /etc/odbcinst.ini  # Remove existing link
+            sudo ln -s /usr/local/etc/odbcinst.ini /etc/odbcinst.ini  # Recreate the link
+          fi
+      
+          if [ ! -e /etc/odbc.ini ]; then
+            sudo ln -s /usr/local/etc/odbc.ini /etc/odbc.ini
+          else
+            sudo rm /etc/odbc.ini  # Remove existing link
+            sudo ln -s /usr/local/etc/odbc.ini /etc/odbc.ini  # Recreate the link
+          fi
+
           
       - name: execute py script # run main.py
         env:
