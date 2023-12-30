@@ -447,3 +447,4 @@ sqlalchemy.exc.OperationalError: (pyodbc.OperationalError) ('HYT00', '[HYT00] [u
 2023-12-30 04:14:37,834 - ERROR - Failed to get Spotify ids  after 1 attempts.
 2023-12-30 04:14:37,834 - ERROR - An exception occurred: Load data into DB
 2023-12-30 04:18:12,326 - ERROR - An exception occurred: Load data into DB
+2023-12-30 04:22:02,096 - ERROR - An exception occurred: Load data into DB
