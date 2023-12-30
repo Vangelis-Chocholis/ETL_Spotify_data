@@ -22,21 +22,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      
-      - name: Install msodbcsql17
-        run: |
-          sudo curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-archive-keyring.gpg
-          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/mssql-release focal main" | sudo tee /etc/apt/sources.list.d/mssql-release.list > /dev/null
-          sudo apt-get update
-          sudo apt-get install -y msodbcsql17 unixodbc-dev
-
-      - name: Configure ODBC Driver
-        run: |
-          echo "[ODBC Driver 17 for SQL Server]" | sudo tee -a /etc/odbcinst.ini
-          echo "Description=Microsoft ODBC Driver 17 for SQL Server" | sudo tee -a /etc/odbcinst.ini
-          echo "Driver=/opt/microsoft/msodbcsql17/lib64/libmsodbcsql-17.8.so.1.1" | sudo tee -a /etc/odbcinst.ini
-          echo "UsageCount=1" | sudo tee -a /etc/odbcinst.ini
-
             
       - name: execute py script # run main.py
         env:
