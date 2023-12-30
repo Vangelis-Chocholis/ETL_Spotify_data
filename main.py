@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import os
 import logging
 import logging.handlers
+import pyodbc
 # imort functions to extract dat from Spotify API
 from extract_transform_data import extract_artists_followers_table, extract_artists_popularity_table, extract_albums_popularity_table, extract_tracks_popularity_table
 
