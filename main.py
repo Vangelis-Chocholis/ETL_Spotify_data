@@ -14,7 +14,7 @@ from extract_transform_data import extract_artists_followers_table, extract_arti
 # Configure the logging setup
 logging.basicConfig(filename='status.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 for driver in pyodbc.drivers():
-    logging.info(f"driver")
+    logging.info(f"{driver}")
 # connect to database
 # specify server and DB name
 server = "spotifyrockdb.database.windows.net"
