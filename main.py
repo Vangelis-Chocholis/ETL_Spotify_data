@@ -26,13 +26,13 @@ try:
     #connection_string = 'Driver={ODBC Driver 17 for SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid=sqladmin;Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=2000;'
     #connection_string = 'Driver={SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid=sqladmin;Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=2000;'
     connection_string = (
-    'Driver={SQL Server};'
+    'Driver={ODBC Driver 17 for SQL Server};'
     'Server=tcp:' + server + ',1433;'
     'Database=' + database + ';'
-    'UID=sqladmin;'
-    'PWD=' + password + ';'
+    'Uid=sqladmin;'
+    'Pwd=' + password + ';'
     'Encrypt=yes;'
-    'TrustServerCertificate=yes;'
+    'TrustServerCertificate=no;'
     'Connection Timeout=2000;')
     
 except Exception as e:
