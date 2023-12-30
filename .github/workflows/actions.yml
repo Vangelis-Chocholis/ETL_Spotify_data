@@ -25,12 +25,10 @@ jobs:
         
       - name: Install ODBC Driver for SQL Server
         run: |
-          sudo su
-          curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+          echo "deb [arch=amd64] https://packages.microsoft.com/ubuntu/20.04/prod focal main" | sudo tee /etc/apt/sources.list.d/mssql-release.list
           sudo apt-get update
-          sudo ACCEPT_EULA=Y apt-get -q -y install msodbcsql17    
-
+          sudo ACCEPT_EULA=Y apt-get -q -y install msodbcsql17
 
 
       - name: execute py script # run main.py
