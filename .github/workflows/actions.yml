@@ -23,45 +23,24 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: Check Ubuntu version and install ODBC drivers
+      - name: Install msodbcsql17
         run: |
-          curl https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
-          curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
+          sudo su
+          curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+          exit
           sudo apt-get update
           sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17
-  
-          # Optional: for bcp and sqlcmd
-          sudo ACCEPT_EULA=Y apt-get install -y mssql-tools
-          echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> $HOME/.bashrc
-          source $HOME/.bashrc
-  
-          # Optional: for unixODBC development headers
           sudo apt-get install -y unixodbc-dev
 
-      - name: Install ODBC Driver
+      - name: Configure ODBC Driver
         run: |
-          # Install ODBC Driver 17 for SQL Server
-          sudo apt-get install -y odbc-driver-17
+          echo "[ODBC Driver 17 for SQL Server]" >> /etc/odbcinst.ini
+          echo "Description=Microsoft ODBC Driver 17 for SQL Server" >> /etc/odbcinst.ini
+          echo "Driver=/opt/microsoft/msodbcsql17/lib64/libmsodbcsql-17.8.so.1.1" >> /etc/odbcinst.ini
+          echo "UsageCount=1" >> /etc/odbcinst.ini
 
-              
-      - name: Create Symbolic Links
-        run: |
-          # Check if symbolic links already exist
-          if [ ! -e /etc/odbcinst.ini ]; then
-            sudo ln -s /usr/local/etc/odbcinst.ini /etc/odbcinst.ini
-          else
-            sudo rm /etc/odbcinst.ini  # Remove existing link
-            sudo ln -s /usr/local/etc/odbcinst.ini /etc/odbcinst.ini  # Recreate the link
-          fi
-      
-          if [ ! -e /etc/odbc.ini ]; then
-            sudo ln -s /usr/local/etc/odbc.ini /etc/odbc.ini
-          else
-            sudo rm /etc/odbc.ini  # Remove existing link
-            sudo ln -s /usr/local/etc/odbc.ini /etc/odbc.ini  # Recreate the link
-          fi
-
-          
+            
       - name: execute py script # run main.py
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
