@@ -503,3 +503,4 @@ NameError: name 'URL' is not defined
 2023-12-30 13:06:43,602 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 1/1)
 2023-12-30 13:06:48,607 - ERROR - Failed to get Spotify ids  after 1 attempts.
 2023-12-30 13:06:48,607 - ERROR - An exception occurred: Load data into DB
+2023-12-30 13:10:14,185 - ERROR - An exception occurred: Load data into DB
