@@ -21,9 +21,13 @@ jobs:
       - name: install python packages
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          sudo apt-get install unixodbc odbcinst
-          
+
+      
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unixodbc unixodbc-dev
+          python -m pip install pyodbc    
 
           
       - name: execute py script # run main.py
