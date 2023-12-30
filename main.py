@@ -35,7 +35,7 @@ def set_engine(connection_string, max_retries=5, retry_delay=5):
     while attempts < max_retries:
         try:
             #engine = sqlalchemy.create_engine(f'mssql+pyodbc:///?odbc_connect={connection_string}')
-            connection_url = URL.create("mssql+pyodbc", query={"odbc_connect": connection_string})
+            connection_url = sqlalchemy.URL.create("mssql+pyodbc", query={"odbc_connect": connection_string})
             engine = sqlalchemy.create_engine(connection_url)
             return engine
         except Exception as e:
