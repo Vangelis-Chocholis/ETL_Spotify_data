@@ -6,15 +6,13 @@ from dotenv import load_dotenv
 import os
 import logging
 import logging.handlers
-import pyodbc
 # imort functions to extract dat from Spotify API
 from extract_transform_data import extract_artists_followers_table, extract_artists_popularity_table, extract_albums_popularity_table, extract_tracks_popularity_table
 
 
 # Configure the logging setup
 logging.basicConfig(filename='status.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-for driver in pyodbc.drivers():
-    logging.info(f"{driver}")
+
 # connect to database
 # specify server and DB name
 server = "spotifyrockdb.database.windows.net"
@@ -25,7 +23,7 @@ try:
     #password = os.getenv("PASSWORD")
     password = os.environ["PASSWORD"]
     # set connection string
-    connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid=sqladmin;Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=2000;'
+    connection_string = 'Driver={ODBC Driver 17 for SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid=sqladmin;Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=2000;'
 except Exception as e:
     logging.error("An exception occurred: Database PASSWORD not found", exc_info=False)
                                                                     
@@ -109,9 +107,9 @@ def load_to_database(engine, tuple_ids):
 
 
 # Run fucntions
-'''engine = set_engine(connection_string)
+engine = set_engine(connection_string)
 tuple_ids = get_spotify_ids(engine)
-load_to_database(engine, tuple_ids)'''
+load_to_database(engine, tuple_ids)
 
 
 
