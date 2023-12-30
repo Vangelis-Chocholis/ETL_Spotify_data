@@ -15,7 +15,8 @@ logging.basicConfig(filename='status.log', level=logging.INFO, format='%(asctime
 
 # connect to database
 # specify server and DB name
-server = "spotifyrockdb.database.windows.net"
+#server = "spotifyrockdb.database.windows.net"
+server = "178.147.80.126"
 database = "SpotifyRockDB"
 # load credentials
 try:
@@ -24,16 +25,27 @@ try:
     password = os.environ["PASSWORD"]
     # set connection string
     #connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid=sqladmin;Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=2000;'
+<<<<<<< HEAD
     #connection_string = 'DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server+';DATABASE='+database+';UID=sqladmin;PWD='+password
     connection_string = (
     'Driver={ODBC Driver 18 for SQL Server};'
+=======
+    connection_string = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID=sqladmin;PWD='+password
+    '''connection_string = (
+    'Driver={ODBC Driver 17 for SQL Server};'
+>>>>>>> b882fb3b9f85c51833fa62aa718f70d267e6656a
     'Server=tcp:' + server + ',1433;'
     'Database=' + database + ';'
     'Uid=sqladmin;'
     'Pwd=' + password + ';'
     'Encrypt=yes;'
+<<<<<<< HEAD
     'TrustServerCertificate=no;'
     'Connection Timeout=2000;')
+=======
+    'TrustServerCertificate=yes;'
+    'Connection Timeout=2000;')'''
+>>>>>>> b882fb3b9f85c51833fa62aa718f70d267e6656a
     
 except Exception as e:
     logging.error("An exception occurred: Database PASSWORD not found", exc_info=False)
