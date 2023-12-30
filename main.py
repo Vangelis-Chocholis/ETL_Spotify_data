@@ -23,17 +23,17 @@ try:
     #password = os.getenv("PASSWORD")
     password = os.environ["PASSWORD"]
     # set connection string
-    #connection_string = 'Driver={ODBC Driver 17 for SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid=sqladmin;Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=2000;'
-    #connection_string = 'Driver={SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid=sqladmin;Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=2000;'
-    connection_string = (
-    'Driver={ODBC Driver 17 for SQL Server};'
+    #connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid=sqladmin;Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=2000;'
+    connection_string = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID=sqladmin;PWD='+password
+    '''connection_string = (
+    'Driver={ODBC Driver 18 for SQL Server};'
     'Server=tcp:' + server + ',1433;'
     'Database=' + database + ';'
     'Uid=sqladmin;'
     'Pwd=' + password + ';'
     'Encrypt=yes;'
     'TrustServerCertificate=no;'
-    'Connection Timeout=2000;')
+    'Connection Timeout=2000;')'''
     
 except Exception as e:
     logging.error("An exception occurred: Database PASSWORD not found", exc_info=False)
@@ -46,6 +46,7 @@ def set_engine(connection_string, max_retries=5, retry_delay=5):
     while attempts < max_retries:
         try:
             engine = sqlalchemy.create_engine(f'mssql+pyodbc:///?odbc_connect={connection_string}')
+            #engine = sqlalchemy.create_engine(f"mssql+pyodbc://scott:tiger^5HHH@mssql2017:1433/test?driver=ODBC+Driver+13+for+SQL+Server&Connect+Timeout=30")
             return engine
         except Exception as e:
             logging.error(f"An exception occurred: SQLAlcehmy engine error (Attempt {attempts + 1}/{max_retries})", exc_info=True)
@@ -60,8 +61,8 @@ def set_engine(connection_string, max_retries=5, retry_delay=5):
 # get artist_ids, album_ids, track_ids lists
 def get_spotify_ids(engine):
     attempts = 0
-    max_retries = 1
-    retry_delay = 5
+    max_retries = 2
+    retry_delay = 2
     while attempts < max_retries:
         try:
             query = f'SELECT artist_id FROM artists_table'
