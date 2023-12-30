@@ -38,7 +38,7 @@ def set_engine(connection_string, max_retries=5, retry_delay=5):
             return engine
         except Exception as e:
             logging.error(f"An exception occurred: SQLAlcehmy engine error (Attempt {attempts + 1}/{max_retries})", exc_info=True)
-            attempts += 1
+            attempts += 2
             time.sleep(retry_delay)
 
     logging.error(f"Failed to create the SQLAlchemy engine after {max_retries} attempts.", exc_info=False)
