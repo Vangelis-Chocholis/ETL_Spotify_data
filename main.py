@@ -12,7 +12,8 @@ from extract_transform_data import extract_artists_followers_table, extract_arti
 
 # Configure the logging setup
 logging.basicConfig(filename='status.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
+for driver in pyodbc.drivers():
+    logging.info(f"driver")
 # connect to database
 # specify server and DB name
 server = "spotifyrockdb.database.windows.net"
@@ -70,34 +71,6 @@ def get_spotify_ids(engine):
     # Log the exception with the logging module
     logging.error(f"Failed to get Spotify ids  after {max_retries} attempts.", exc_info=False)
     return None
-
-
-
-'''# get artist_ids, album_ids, track_ids lists
-def get_spotify_ids(engine):
-    """This functions query the database, and returns a tuple of lists,
-    with artist/album/track ids to make data update
-
-    Args:
-        engine (SQLAlchemy engine)
-
-    Returns:
-        SQLAlchemy engine: the engine to pass in the functions later on
-    """
-    try:
-        query = f'SELECT artist_id FROM artists_table'
-        artist_ids = pd.read_sql(query, engine)['artist_id'].to_list() 
-
-        #query = f'SELECT album_id FROM albums_table'
-        #album_ids = pd.read_sql(query, engine)['album_id'].to_list() 
-
-        #query = f'SELECT track_id FROM tracks_table'
-        #track_ids = pd.read_sql(query, engine)['track_id'].to_list()
-        return artist_ids #, album_ids, track_ids 
-    except Exception as e:
-        # Log the exception with the logging module
-        logging.error("An exception occurred: get artist_ids, album_ids, track_ids lists", exc_info=False)
-    '''
     
  
 # Load
@@ -135,9 +108,9 @@ def load_to_database(engine, tuple_ids):
 
 
 # Run fucntions
-engine = set_engine(connection_string)
+'''engine = set_engine(connection_string)
 tuple_ids = get_spotify_ids(engine)
-load_to_database(engine, tuple_ids)
+load_to_database(engine, tuple_ids)'''
 
 
 
