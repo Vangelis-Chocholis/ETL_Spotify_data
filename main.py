@@ -24,8 +24,8 @@ try:
     password = os.environ["PASSWORD"]
     # set connection string
     #connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid=sqladmin;Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=2000;'
-    connection_string = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID=sqladmin;PWD='+password
-    '''connection_string = (
+    #connection_string = 'DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server+';DATABASE='+database+';UID=sqladmin;PWD='+password
+    connection_string = (
     'Driver={ODBC Driver 18 for SQL Server};'
     'Server=tcp:' + server + ',1433;'
     'Database=' + database + ';'
@@ -33,7 +33,7 @@ try:
     'Pwd=' + password + ';'
     'Encrypt=yes;'
     'TrustServerCertificate=no;'
-    'Connection Timeout=2000;')'''
+    'Connection Timeout=2000;')
     
 except Exception as e:
     logging.error("An exception occurred: Database PASSWORD not found", exc_info=False)
