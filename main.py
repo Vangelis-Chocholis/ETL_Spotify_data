@@ -14,8 +14,8 @@ logging.basicConfig(filename='status.log', level=logging.INFO, format='%(asctime
 
 # connect to database
 # specify server and DB name
-#server = "spotifyrockdb.database.windows.net"
-server = "178.147.80.126"
+server = "spotifyrockdb.database.windows.net"
+#server = "178.147.80.126"
 database = "SpotifyRockDB"
 # load credentials
 try:
@@ -32,7 +32,7 @@ try:
     'Uid=sqladmin;'
     'Pwd=' + password + ';'
     'Encrypt=yes;'
-    'TrustServerCertificate=no;'
+    'TrustServerCertificate=yes;'
     'Connection Timeout=2000;')
     
 except Exception as e:
