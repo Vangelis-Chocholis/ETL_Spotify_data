@@ -449,3 +449,22 @@ sqlalchemy.exc.OperationalError: (pyodbc.OperationalError) ('HYT00', '[HYT00] [u
 2023-12-30 04:18:12,326 - ERROR - An exception occurred: Load data into DB
 2023-12-30 04:22:02,096 - ERROR - An exception occurred: Load data into DB
 2023-12-30 04:30:48,202 - ERROR - An exception occurred: Load data into DB
+2023-12-30 04:38:16,168 - ERROR - An exception occurred: SQLAlcehmy engine error (Attempt 1/5)
+2023-12-30 04:38:21,173 - ERROR - An exception occurred: SQLAlcehmy engine error (Attempt 2/5)
+2023-12-30 04:38:26,178 - ERROR - An exception occurred: SQLAlcehmy engine error (Attempt 3/5)
+2023-12-30 04:38:31,183 - ERROR - An exception occurred: SQLAlcehmy engine error (Attempt 4/5)
+2023-12-30 04:38:36,189 - ERROR - An exception occurred: SQLAlcehmy engine error (Attempt 5/5)
+2023-12-30 04:38:41,194 - ERROR - Failed to create the SQLAlchemy engine after 5 attempts.
+2023-12-30 04:38:41,261 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 1/1)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 59, in get_spotify_ids
+    artist_ids = pd.read_sql(query, engine)['artist_id'].to_list()
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 654, in read_sql
+    return pandas_sql.read_query(
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2326, in read_query
+    cursor = self.execute(sql, params)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2260, in execute
+    cur = self.con.cursor()
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2023-12-30 04:38:46,266 - ERROR - Failed to get Spotify ids  after 1 attempts.
+2023-12-30 04:38:46,267 - ERROR - An exception occurred: Load data into DB
