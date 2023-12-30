@@ -24,7 +24,7 @@ try:
     password = os.environ["PASSWORD"]
     # set connection string
     #connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid=sqladmin;Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=2000;'
-    connection_string = 'DRIVER={SQL Server Native Client 11.0"};SERVER='+server+';DATABASE='+database+';UID=sqladmin;PWD='+password
+    connection_string = 'DRIVER={SQL Server Native Client 11.0};SERVER='+server+';DATABASE='+database+';UID=sqladmin;PWD='+password
     '''connection_string = (
     'Driver={ODBC Driver 18 for SQL Server};'
     'Server=tcp:' + server + ',1433;'
