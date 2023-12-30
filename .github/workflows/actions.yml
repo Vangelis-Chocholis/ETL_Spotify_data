@@ -38,7 +38,11 @@ jobs:
           # Optional: for unixODBC development headers
           sudo apt-get install -y unixodbc-dev
               
-
+      - name: Create Symbolic Links
+        run: |
+          # Create symbolic links to ODBC configuration files
+          sudo ln -s /usr/local/etc/odbcinst.ini /etc/odbcinst.ini
+          sudo ln -s /usr/local/etc/odbc.ini /etc/odbc.ini
           
       - name: execute py script # run main.py
         env:
