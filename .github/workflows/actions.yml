@@ -23,11 +23,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: Install Dependencies
+      - name: Install MariaDB Connector/ODBC
         run: |
           sudo apt-get update
+          sudo apt-get install -y libmariadb3 libmariadb-dev
           sudo apt-get install -y unixodbc unixodbc-dev
-          python -m pip install pyodbc    
+          sudo sh -c 'echo "deb [arch=amd64] http://archive.mariadb.org/mariadb-connector-odbc/repo/ubuntu focal main" > /etc/apt/sources.list.d/mariadb-connector-odbc.list'
+          sudo apt-get install -y mariadb-connector-odbc  
 
           
       - name: execute py script # run main.py
