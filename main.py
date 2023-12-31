@@ -119,14 +119,14 @@ def load_to_database(engine, tuple_ids):
 
 
 # Run fucntions
-engine = set_engine(connection_string)
+'''engine = set_engine(connection_string)
 tuple_ids = get_spotify_ids(engine)
-load_to_database(engine, tuple_ids)
+load_to_database(engine, tuple_ids)'''
 
 
 
 
-'''
+
 #########
 ### CREATING DEMO TABLE to test code
 
@@ -144,10 +144,10 @@ def execute_commit_sql(sql):
     cursor.close()
     
     
-sql_demo_table ="CREATE TABLE new_demo_table (artist_id VARCHAR(255),artist_popularity INT,date DATE);"
+sql_demo_table ="CREATE TABLE new_new_demo_table (artist_id VARCHAR(255),artist_popularity INT,date DATE);"
 
 execute_commit_sql(sql_demo_table)
-conn.close()'''
+conn.close()
 
 
 
