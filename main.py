@@ -144,9 +144,13 @@ def execute_commit_sql(sql):
     cursor.close()
     
     
-sql_demo_table ="CREATE TABLE new_new_demo_table (artist_id VARCHAR(255),artist_popularity INT,date DATE);"
+sql_demo_table ="CREATE TABLE my_new_demo_table (artist_id VARCHAR(255),artist_popularity INT,date DATE);"
 
-execute_commit_sql(sql_demo_table)
+try:
+    execute_commit_sql(sql_demo_table)
+except Exception as e:
+    logging.error("An exception occurred: connect with DB failed", exc_info=False)
+    
 conn.close()
 
 
