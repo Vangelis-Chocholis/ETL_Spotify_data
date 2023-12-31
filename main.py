@@ -14,9 +14,7 @@ logging.basicConfig(filename='status.log', level=logging.INFO, format='%(asctime
 
 # connect to database
 # specify server and DB name
-#server = "spotifyrockdb.database.windows.net"
-#server = "192.168.1.7"
-server = "169.254.147.40"
+server = "SSspotifyrockdb.database.windows.net"
 database = "SpotifyRockDB"
 
 # load credentials
