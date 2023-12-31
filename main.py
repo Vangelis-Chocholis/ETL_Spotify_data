@@ -119,9 +119,9 @@ def load_to_database(engine, tuple_ids):
 
 
 # Run fucntions
-'''engine = set_engine(connection_string)
-tuple_ids = get_spotify_ids(engine)
-load_to_database(engine, tuple_ids)'''
+#engine = set_engine(connection_string)
+#tuple_ids = get_spotify_ids(engine)
+#load_to_database(engine, tuple_ids)
 
 
 
