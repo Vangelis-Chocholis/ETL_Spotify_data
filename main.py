@@ -119,7 +119,7 @@ def load_to_database(engine, tuple_ids):
 
 
 # Run fucntions
-#engine = set_engine(connection_string)
+engine = set_engine(connection_string)
 #tuple_ids = get_spotify_ids(engine)
 #load_to_database(engine, tuple_ids)
 
@@ -130,7 +130,7 @@ def load_to_database(engine, tuple_ids):
 #########
 ### CREATING DEMO TABLE to test code
 
-import pypyodbc as odbc
+'''import pypyodbc as odbc
 conn = odbc.connect(connection_string)
 
 # Create tables
@@ -151,7 +151,7 @@ try:
 except Exception as e:
     logging.error("An exception occurred: connect with DB failed", exc_info=False)
     
-conn.close()
+conn.close()'''
 
 
 
