@@ -124,7 +124,6 @@ conn = odbc.connect(connection_string)
 query = '''SELECT artist_id FROM artists_table'''
 try:
     artist_ids = pd.read_sql_query(sql=query, con=conn)['artist_id'].to_list()
-    engine.dispose()
     logging.info(f"Code test pass", exc_info=True)
 except Exception as e:
             logging.error(f"An exception occurred CONNETCTION FAILED", exc_info=True)
