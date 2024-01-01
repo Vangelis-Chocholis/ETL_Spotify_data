@@ -119,12 +119,13 @@ def load_to_database(engine, tuple_ids):
 
 
 # Run fucntions
-engine = set_engine(connection_string)
-query = f'SELECT artist_id FROM artists_table'
+import pypyodbc as odbc
+conn = odbc.connect(connection_string)
+query = '''SELECT artist_id FROM artists_table'''
 try:
-    artist_ids = pd.read_sql_query(query, engine)['artist_id'].to_list()
+    artist_ids = pd.read_sql_query(sql=query, con=conn)['artist_id'].to_list()
     engine.dispose()
-    logging.info(f"all good", exc_info=True)
+    logging.info(f"Code test pass", exc_info=True)
 except Exception as e:
             logging.error(f"An exception occurred CONNETCTION FAILED", exc_info=True)
 
