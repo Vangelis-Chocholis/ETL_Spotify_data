@@ -122,7 +122,7 @@ def load_to_database(engine, tuple_ids):
 engine = set_engine(connection_string)
 query = f'SELECT artist_id FROM artists_table'
 try:
-    artist_ids = pd.read_sql(query, engine)['artist_id'].to_list()
+    artist_ids = pd.read_sql_query(query, engine)['artist_id'].to_list()
     engine.dispose()
     logging.info(f"all good", exc_info=True)
 except Exception as e:
