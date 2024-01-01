@@ -2208,3 +2208,8 @@ Traceback (most recent call last):
     return self.loaded_dbapi.connect(*cargs, **cparams)
 sqlalchemy.exc.OperationalError: (pyodbc.OperationalError) ('HYT00', '[HYT00] [Microsoft][ODBC Driver 18 for SQL Server]Login timeout expired (0) (SQLDriverConnect)')
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-01-01 04:15:20,823 - ERROR - An exception occurred CONNETCTION FAILED
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 127, in <module>
+    engine.dispose()
+NameError: name 'engine' is not defined
