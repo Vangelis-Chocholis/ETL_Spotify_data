@@ -5,3 +5,5 @@ Traceback (most recent call last):
     return engine
 NameError: name 'engine' is not defined
 2024-01-02 16:49:34,893 - ERROR - Failed to create the SQLAlchemy engine after 1 attempts.
+2024-01-02 16:51:19,512 - INFO - Code executed successfully!
+2024-01-02 16:51:19,512 - ERROR - An exception occurred: Load data into DB
