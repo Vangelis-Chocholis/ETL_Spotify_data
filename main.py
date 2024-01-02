@@ -43,7 +43,17 @@ except Exception as e:
 
 
 # connect to database using pyodbc (without SQLAlchemy)
-def database_connection(connection_string, max_retries=1, retry_delay=5):
+def database_connection(connection_string, max_retries=5, retry_delay=3):
+    """Connect to SQL Server using pyodbc
+
+    Args:
+        connection_string (string): The connection string to the database
+        max_retries (int, optional): Max number of retries. Defaults to 5.
+        retry_delay (int, optional): Number of seconds to delay between retries. Defaults to 3.
+
+    Returns:
+        _type_: _description_
+    """
     attempts = 0
     while attempts < max_retries:
         try:
@@ -59,7 +69,17 @@ def database_connection(connection_string, max_retries=1, retry_delay=5):
 
 
 # set SQLAlchemy engine
-def set_engine(conn, max_retries=1, retry_delay=5):
+def set_engine(conn, max_retries=5, retry_delay=3):
+    """Creates a SQLAlchemy engine using a preexisting connection
+
+    Args:
+        conn (odbc deonnection): The connection to the database
+        max_retries (int, optional): Max number of retries. Defaults to 5.
+        retry_delay (int, optional): Number of seconds to delay between retries. Defaults to 3.
+
+    Returns:
+        SQLAlchemy engine: The SQLAlchemy engine
+    """
     attempts = 0
     while attempts < max_retries:
         try:
@@ -77,8 +97,16 @@ def set_engine(conn, max_retries=1, retry_delay=5):
 
 # get artist_ids, album_ids, track_ids lists
 def get_spotify_ids(engine):
+    """This function gets the Spotify ids from the database
+
+    Args:
+        engine (SQLAlchemy engine): The SQLAlchemy engine
+
+    Returns:
+        tuple: A tuple of lists of Spotify ids, corresponding to artists, albums and tracks.
+    """
     attempts = 0
-    max_retries = 2
+    max_retries = 3
     retry_delay = 2
     while attempts < max_retries:
         try:
@@ -91,8 +119,8 @@ def get_spotify_ids(engine):
             #query = f'SELECT track_id FROM tracks_table'
             #track_ids = pd.read_sql(query, engine)['track_id'].to_list()
             
-            logging.info("Code executed successfully!")
             return artist_ids #, album_ids, track_ids 
+        
         except Exception as e:
             logging.error(f"An exception occurred: failed to get Spotify ids (Attempt {attempts + 1}/{max_retries})", exc_info=True)
             attempts += 1
@@ -105,11 +133,11 @@ def get_spotify_ids(engine):
  
 # Load
 def load_to_database(engine, tuple_ids):
-    """Extracts new data from Spotify API, and load them into the database
+    """Load data into the database, using the SQLAlchemy engine and the Spotify ids
 
     Args:
-        engine (SQLAlchemy engine)
-        tupl_ids (tuple): tuple of lists of spotify ids
+        engine (SQLAlchemy engine): The SQLAlchemy engine
+        tupl_ids (tuple): A tuple of lists of Spotify ids, corresponding to artists, albums and tracks.
     """      
     try:
         artist_ids = tuple_ids
@@ -129,8 +157,11 @@ def load_to_database(engine, tuple_ids):
 
         # close SQLAlchemy engine
         engine.dispose()
+        # close connection
+        if conn is not None and conn.connected:
+            conn.close()
         # Add a logging statement for successful completion
-        logging.info("Code executed successfully!")
+        logging.info("The database has been updated successfully!")
     except Exception as e:
         # Log the exception with the logging module
         logging.error("An exception occurred: Load data into DB", exc_info=True)
@@ -138,43 +169,14 @@ def load_to_database(engine, tuple_ids):
 
 
 # Run fucntions
+# establish connection
 conn = database_connection(connection_string)
+# set SQLAlchemy engine
 engine = set_engine(conn)
+# get Spotify ids
 tuple_ids = get_spotify_ids(engine)
+# load data into database
 load_to_database(engine, tuple_ids)
-
-if conn is not None and conn.connected:
-        conn.close()
-
-
-
-
-
-#########
-### CREATING DEMO TABLE to test code
-
-'''import pypyodbc as odbc
-conn = odbc.connect(connection_string)
-
-# Create tables
-
-def execute_commit_sql(sql):
-    # Execute sql query
-    cursor = conn.cursor()
-    cursor.execute(sql)
-    # Commit changes to the database 
-    conn.commit()
-    cursor.close()
-    
-    
-sql_demo_table ="CREATE TABLE my_new_demo_table (artist_id VARCHAR(255),artist_popularity INT,date DATE);"
-
-try:
-    execute_commit_sql(sql_demo_table)
-except Exception as e:
-    logging.error("An exception occurred: connect with DB failed", exc_info=False)
-    
-conn.close()'''
 
 
 
