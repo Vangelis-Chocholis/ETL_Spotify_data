@@ -7,3 +7,13 @@ NameError: name 'engine' is not defined
 2024-01-02 16:49:34,893 - ERROR - Failed to create the SQLAlchemy engine after 1 attempts.
 2024-01-02 16:51:19,512 - INFO - Code executed successfully!
 2024-01-02 16:51:19,512 - ERROR - An exception occurred: Load data into DB
+2024-01-02 16:54:40,495 - INFO - Code executed successfully!
+2024-01-02 16:54:40,495 - ERROR - An exception occurred: Load data into DB
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 121, in load_to_database
+    df_artists_popularity_table = extract_artists_popularity_table(artist_ids=artist_ids)
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/extract_transform_data.py", line 97, in extract_artists_popularity_table
+    sp = get_spotify_client()
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/extract_transform_data.py", line 23, in get_spotify_client
+    client_id = os.environ("CLIENT_ID")
+TypeError: '_Environ' object is not callable
