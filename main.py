@@ -40,6 +40,22 @@ except Exception as e:
                                                                     
 
 
+# connect to database using pyodbc (without SQLAlchemy)
+def database_connection(connection_string, max_retries=5, retry_delay=5):
+    attempts = 0
+    while attempts < max_retries:
+        try:
+            conn = odbc.connect(connection_string)
+            return conn
+        except Exception as e:
+            logging.error(f"An exception occurred: connect with DB failed (Attempt {attempts + 1}/{max_retries})", exc_info=True)
+            attempts += 1
+            time.sleep(retry_delay)
+
+    logging.error(f"Failed to connect to the database after {max_retries} attempts.", exc_info=False)
+    return None
+
+
 # set SQLAlchemy engine
 def set_engine(connection_string, max_retries=5, retry_delay=5):
     attempts = 0
@@ -119,18 +135,12 @@ def load_to_database(engine, tuple_ids):
 
 
 # Run fucntions
-import pypyodbc as odbc
-conn = odbc.connect(connection_string)
-query = '''SELECT artist_id FROM artists_table'''
-try:
-    artist_ids = pd.read_sql_query(sql=query, con=conn)['artist_id'].to_list()
-    logging.info(f"Code test pass", exc_info=True)
-except Exception as e:
-            logging.error(f"An exception occurred CONNETCTION FAILED", exc_info=True)
-
-#tuple_ids = get_spotify_ids(engine)
-#load_to_database(engine, tuple_ids)
-
+from sqlalchemy import create_engine
+from sqlalchemy.pool import StaticPool
+conn = database_connection(connection_string)
+engine = create_engine("mssql+pyodbc://", poolclass=StaticPool, creator=lambda: conn)
+artist_ids = get_spotify_ids(conn)
+engine.dispose()
 
 
 
