@@ -1,1 +1,28 @@
 
+2024-01-02 18:12:22,513 - ERROR - An exception occurred: connect with DB failed (Attempt 1/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 60, in database_connection
+    conn = odbc.connect(connection_string)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 2454, in __init__
+    self.connect(connectString, autocommit, ansi, timeout, unicode_results, readonly)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 2507, in connect
+    check_success(self, ret)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 1009, in check_success
+    ctrl_err(SQL_HANDLE_DBC, ODBC_obj.dbc_h, ret, ODBC_obj.ansi)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 983, in ctrl_err
+    raise OperationalError(state,err_text)
+pypyodbc.OperationalError: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 18 for SQL Server]Login timeout expired')
+2024-01-02 18:12:40,977 - ERROR - An exception occurred: connect with DB failed (Attempt 2/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 60, in database_connection
+    conn = odbc.connect(connection_string)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 2454, in __init__
+    self.connect(connectString, autocommit, ansi, timeout, unicode_results, readonly)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 2507, in connect
+    check_success(self, ret)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 1009, in check_success
+    ctrl_err(SQL_HANDLE_DBC, ODBC_obj.dbc_h, ret, ODBC_obj.ansi)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 983, in ctrl_err
+    raise OperationalError(state,err_text)
+pypyodbc.OperationalError: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 18 for SQL Server]Login timeout expired')
+2024-01-02 18:12:57,343 - INFO - The database has been updated successfully!
