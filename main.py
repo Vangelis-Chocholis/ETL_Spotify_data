@@ -142,7 +142,10 @@ conn = database_connection(connection_string)
 engine = set_engine(conn)
 tuple_ids = get_spotify_ids(engine)
 load_to_database(engine, tuple_ids)
-conn.close()
+
+if conn is not None and conn.connected:
+        conn.close()
+
 
 
 
