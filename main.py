@@ -140,8 +140,8 @@ def load_to_database(engine, tuple_ids):
 # Run fucntions
 conn = database_connection(connection_string)
 engine = set_engine(conn)
-tuple_ids = get_spotify_ids(engine)
-load_to_database(engine, tuple_ids)
+#tuple_ids = get_spotify_ids(engine)
+#load_to_database(engine, tuple_ids)
 conn.close()
 
 
