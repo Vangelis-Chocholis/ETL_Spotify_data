@@ -2265,3 +2265,92 @@ Traceback (most recent call last):
 AttributeError: 'NoneType' object has no attribute 'cursor'
 2024-01-02 02:20:23,927 - ERROR - Failed to get Spotify ids  after 2 attempts.
 2024-01-02 02:26:32,436 - INFO - Code executed successfully!
+2024-01-02 16:35:02,132 - ERROR - An exception occurred: connect with DB failed (Attempt 1/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 50, in database_connection
+    conn = odbc.connect(connection_string)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 2454, in __init__
+    self.connect(connectString, autocommit, ansi, timeout, unicode_results, readonly)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 2507, in connect
+    check_success(self, ret)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 1009, in check_success
+    ctrl_err(SQL_HANDLE_DBC, ODBC_obj.dbc_h, ret, ODBC_obj.ansi)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 983, in ctrl_err
+    raise OperationalError(state,err_text)
+pypyodbc.OperationalError: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 18 for SQL Server]Login timeout expired')
+2024-01-02 16:35:22,479 - ERROR - An exception occurred: connect with DB failed (Attempt 2/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 50, in database_connection
+    conn = odbc.connect(connection_string)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 2454, in __init__
+    self.connect(connectString, autocommit, ansi, timeout, unicode_results, readonly)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 2507, in connect
+    check_success(self, ret)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 1009, in check_success
+    ctrl_err(SQL_HANDLE_DBC, ODBC_obj.dbc_h, ret, ODBC_obj.ansi)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 983, in ctrl_err
+    raise OperationalError(state,err_text)
+pypyodbc.OperationalError: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 18 for SQL Server]Login timeout expired')
+2024-01-02 16:35:42,829 - ERROR - An exception occurred: connect with DB failed (Attempt 3/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 50, in database_connection
+    conn = odbc.connect(connection_string)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 2454, in __init__
+    self.connect(connectString, autocommit, ansi, timeout, unicode_results, readonly)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 2507, in connect
+    check_success(self, ret)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 1009, in check_success
+    ctrl_err(SQL_HANDLE_DBC, ODBC_obj.dbc_h, ret, ODBC_obj.ansi)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pypyodbc.py", line 983, in ctrl_err
+    raise OperationalError(state,err_text)
+pypyodbc.OperationalError: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 18 for SQL Server]Login timeout expired')
+2024-01-02 16:35:49,925 - ERROR - An exception occurred: SQLAlcehmy engine error (Attempt 1/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 67, in set_engine
+    return engine
+NameError: name 'engine' is not defined
+2024-01-02 16:35:54,930 - ERROR - An exception occurred: SQLAlcehmy engine error (Attempt 2/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 67, in set_engine
+    return engine
+NameError: name 'engine' is not defined
+2024-01-02 16:35:59,936 - ERROR - An exception occurred: SQLAlcehmy engine error (Attempt 3/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 67, in set_engine
+    return engine
+NameError: name 'engine' is not defined
+2024-01-02 16:36:04,942 - ERROR - An exception occurred: SQLAlcehmy engine error (Attempt 4/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 67, in set_engine
+    return engine
+NameError: name 'engine' is not defined
+2024-01-02 16:36:09,948 - ERROR - An exception occurred: SQLAlcehmy engine error (Attempt 5/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 67, in set_engine
+    return engine
+NameError: name 'engine' is not defined
+2024-01-02 16:36:14,953 - ERROR - Failed to create the SQLAlchemy engine after 5 attempts.
+2024-01-02 16:36:14,960 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 1/2)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 86, in get_spotify_ids
+    artist_ids = pd.read_sql(query, engine)['artist_id'].to_list()
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 654, in read_sql
+    return pandas_sql.read_query(
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2326, in read_query
+    cursor = self.execute(sql, params)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2260, in execute
+    cur = self.con.cursor()
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2024-01-02 16:36:16,962 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 2/2)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 86, in get_spotify_ids
+    artist_ids = pd.read_sql(query, engine)['artist_id'].to_list()
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 654, in read_sql
+    return pandas_sql.read_query(
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2326, in read_query
+    cursor = self.execute(sql, params)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2260, in execute
+    cur = self.con.cursor()
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2024-01-02 16:36:18,965 - ERROR - Failed to get Spotify ids  after 2 attempts.
+2024-01-02 16:36:18,965 - ERROR - An exception occurred: Load data into DB
