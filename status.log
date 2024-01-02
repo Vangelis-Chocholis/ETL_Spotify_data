@@ -1,1 +1,7 @@
 
+2024-01-02 16:49:29,888 - ERROR - An exception occurred: SQLAlcehmy engine error (Attempt 1/1)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 67, in set_engine
+    return engine
+NameError: name 'engine' is not defined
+2024-01-02 16:49:34,893 - ERROR - Failed to create the SQLAlchemy engine after 1 attempts.
