@@ -43,7 +43,7 @@ except Exception as e:
 
 
 # connect to database using pyodbc (without SQLAlchemy)
-def database_connection(connection_string, max_retries=5, retry_delay=5):
+def database_connection(connection_string, max_retries=1, retry_delay=5):
     attempts = 0
     while attempts < max_retries:
         try:
@@ -59,7 +59,7 @@ def database_connection(connection_string, max_retries=5, retry_delay=5):
 
 
 # set SQLAlchemy engine
-def set_engine(conn, max_retries=5, retry_delay=5):
+def set_engine(conn, max_retries=1, retry_delay=5):
     attempts = 0
     while attempts < max_retries:
         try:
