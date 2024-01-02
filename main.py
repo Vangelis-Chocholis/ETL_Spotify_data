@@ -1,4 +1,5 @@
-import sqlalchemy
+from sqlalchemy import create_engine
+from sqlalchemy.pool import StaticPool
 import pypyodbc as odbc
 import pandas as pd
 import time
@@ -58,16 +59,15 @@ def database_connection(connection_string, max_retries=5, retry_delay=5):
 
 
 # set SQLAlchemy engine
-def set_engine(connection_string, max_retries=5, retry_delay=5):
+def set_engine(conn, max_retries=5, retry_delay=5):
     attempts = 0
     while attempts < max_retries:
         try:
-            engine = sqlalchemy.create_engine(f'mssql+pyodbc:///?odbc_connect={connection_string}')
-            #engine = sqlalchemy.create_engine(f"mssql+pyodbc://scott:tiger^5HHH@mssql2017:1433/test?driver=ODBC+Driver+13+for+SQL+Server&Connect+Timeout=30")
+            create_engine("mssql+pyodbc://", poolclass=StaticPool, creator=lambda: conn)
             return engine
         except Exception as e:
             logging.error(f"An exception occurred: SQLAlcehmy engine error (Attempt {attempts + 1}/{max_retries})", exc_info=True)
-            attempts += 2
+            attempts += 1
             time.sleep(retry_delay)
 
     logging.error(f"Failed to create the SQLAlchemy engine after {max_retries} attempts.", exc_info=False)
@@ -119,7 +119,7 @@ def load_to_database(engine, tuple_ids):
         #df_artists_followers_table.to_sql('artists_followers_table', con=engine, if_exists='append', index=False)
 
         df_artists_popularity_table = extract_artists_popularity_table(artist_ids=artist_ids)
-        df_artists_popularity_table.to_sql('new_demo_table', con=engine, if_exists='append', index=False)
+        df_artists_popularity_table.to_sql('demo_artists_followers_table', con=engine, if_exists='append', index=False)
 
         #df_albums_popularity_table = extract_albums_popularity_table(album_ids=album_ids)
         #df_albums_popularity_table.to_sql('albums_popularity_table', con=engine, if_exists='append', index=False)
@@ -138,12 +138,11 @@ def load_to_database(engine, tuple_ids):
 
 
 # Run fucntions
-from sqlalchemy import create_engine
-from sqlalchemy.pool import StaticPool
 conn = database_connection(connection_string)
-engine = create_engine("mssql+pyodbc://", poolclass=StaticPool, creator=lambda: conn)
-artist_ids = get_spotify_ids(conn)
-engine.dispose()
+engine = set_engine(conn)
+tuple_ids = get_spotify_ids(engine)
+load_to_database(engine, tuple_ids)
+conn.close()
 
 
 
