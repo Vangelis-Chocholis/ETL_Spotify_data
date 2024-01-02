@@ -1,8 +1,10 @@
 name: run main.py
 
 on:
-  schedule:
-    - cron: '*/30 * * * *' # run every 30 minutes
+  push:
+    branches:
+      - main
+
 
 jobs:
   build:
