@@ -2215,3 +2215,52 @@ Traceback (most recent call last):
 NameError: name 'engine' is not defined
 2024-01-01 04:17:24,948 - INFO - Code test pass
 NoneType: None
+2024-01-02 02:19:54,882 - ERROR - An exception occurred: connect with DB failed (Attempt 1/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 48, in database_connection
+    conn = odbc.connect(connection_string)
+NameError: name 'odbc' is not defined
+2024-01-02 02:19:59,888 - ERROR - An exception occurred: connect with DB failed (Attempt 2/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 48, in database_connection
+    conn = odbc.connect(connection_string)
+NameError: name 'odbc' is not defined
+2024-01-02 02:20:04,893 - ERROR - An exception occurred: connect with DB failed (Attempt 3/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 48, in database_connection
+    conn = odbc.connect(connection_string)
+NameError: name 'odbc' is not defined
+2024-01-02 02:20:09,898 - ERROR - An exception occurred: connect with DB failed (Attempt 4/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 48, in database_connection
+    conn = odbc.connect(connection_string)
+NameError: name 'odbc' is not defined
+2024-01-02 02:20:14,901 - ERROR - An exception occurred: connect with DB failed (Attempt 5/5)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 48, in database_connection
+    conn = odbc.connect(connection_string)
+NameError: name 'odbc' is not defined
+2024-01-02 02:20:19,906 - ERROR - Failed to connect to the database after 5 attempts.
+2024-01-02 02:20:19,922 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 1/2)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 85, in get_spotify_ids
+    artist_ids = pd.read_sql(query, engine)['artist_id'].to_list()
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 654, in read_sql
+    return pandas_sql.read_query(
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2326, in read_query
+    cursor = self.execute(sql, params)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2260, in execute
+    cur = self.con.cursor()
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2024-01-02 02:20:21,925 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 2/2)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 85, in get_spotify_ids
+    artist_ids = pd.read_sql(query, engine)['artist_id'].to_list()
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 654, in read_sql
+    return pandas_sql.read_query(
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2326, in read_query
+    cursor = self.execute(sql, params)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2260, in execute
+    cur = self.con.cursor()
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2024-01-02 02:20:23,927 - ERROR - Failed to get Spotify ids  after 2 attempts.
