@@ -2354,3 +2354,33 @@ Traceback (most recent call last):
 AttributeError: 'NoneType' object has no attribute 'cursor'
 2024-01-02 16:36:18,965 - ERROR - Failed to get Spotify ids  after 2 attempts.
 2024-01-02 16:36:18,965 - ERROR - An exception occurred: Load data into DB
+2024-01-02 16:45:37,209 - ERROR - An exception occurred: SQLAlcehmy engine error (Attempt 1/1)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 67, in set_engine
+    return engine
+NameError: name 'engine' is not defined
+2024-01-02 16:45:42,214 - ERROR - Failed to create the SQLAlchemy engine after 1 attempts.
+2024-01-02 16:45:42,237 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 1/2)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 86, in get_spotify_ids
+    artist_ids = pd.read_sql(query, engine)['artist_id'].to_list()
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 654, in read_sql
+    return pandas_sql.read_query(
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2326, in read_query
+    cursor = self.execute(sql, params)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2260, in execute
+    cur = self.con.cursor()
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2024-01-02 16:45:44,240 - ERROR - An exception occurred: failed to get Spotify ids (Attempt 2/2)
+Traceback (most recent call last):
+  File "/home/runner/work/spotify_daily_data_updates/spotify_daily_data_updates/main.py", line 86, in get_spotify_ids
+    artist_ids = pd.read_sql(query, engine)['artist_id'].to_list()
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 654, in read_sql
+    return pandas_sql.read_query(
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2326, in read_query
+    cursor = self.execute(sql, params)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 2260, in execute
+    cur = self.con.cursor()
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2024-01-02 16:45:46,242 - ERROR - Failed to get Spotify ids  after 2 attempts.
+2024-01-02 16:45:46,243 - ERROR - An exception occurred: Load data into DB
