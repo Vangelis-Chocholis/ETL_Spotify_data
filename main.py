@@ -63,7 +63,7 @@ def set_engine(conn, max_retries=1, retry_delay=5):
     attempts = 0
     while attempts < max_retries:
         try:
-            create_engine("mssql+pyodbc://", poolclass=StaticPool, creator=lambda: conn)
+            engine = create_engine("mssql+pyodbc://", poolclass=StaticPool, creator=lambda: conn)
             return engine
         except Exception as e:
             logging.error(f"An exception occurred: SQLAlcehmy engine error (Attempt {attempts + 1}/{max_retries})", exc_info=True)
@@ -140,8 +140,8 @@ def load_to_database(engine, tuple_ids):
 # Run fucntions
 conn = database_connection(connection_string)
 engine = set_engine(conn)
-#tuple_ids = get_spotify_ids(engine)
-#load_to_database(engine, tuple_ids)
+tuple_ids = get_spotify_ids(engine)
+load_to_database(engine, tuple_ids)
 conn.close()
 
 
