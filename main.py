@@ -133,7 +133,7 @@ def load_to_database(engine, tuple_ids):
         logging.info("Code executed successfully!")
     except Exception as e:
         # Log the exception with the logging module
-        logging.error("An exception occurred: Load data into DB", exc_info=False)
+        logging.error("An exception occurred: Load data into DB", exc_info=True)
 
 
 
