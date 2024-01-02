@@ -26,3 +26,4 @@ Traceback (most recent call last):
     raise OperationalError(state,err_text)
 pypyodbc.OperationalError: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 18 for SQL Server]Login timeout expired')
 2024-01-02 18:12:57,343 - INFO - The database has been updated successfully!
+2024-01-02 18:34:51,184 - INFO - The database has been updated successfully!
