@@ -34,8 +34,8 @@ try:
     'Uid=sqladmin;'
     'Pwd=' + password + ';'
     'Encrypt=yes;'
-    'TrustServerCertificate=yes;'
-    'Connection Timeout=2000;')
+    'TrustServerCertificate=no;'
+    'Connection Timeout=1500;')
     
 except Exception as e:
     logging.error("An exception occurred: Database PASSWORD not found", exc_info=False)
