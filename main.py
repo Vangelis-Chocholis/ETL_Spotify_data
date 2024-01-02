@@ -90,6 +90,8 @@ def get_spotify_ids(engine):
 
             #query = f'SELECT track_id FROM tracks_table'
             #track_ids = pd.read_sql(query, engine)['track_id'].to_list()
+            
+            logging.info("Code executed successfully!")
             return artist_ids #, album_ids, track_ids 
         except Exception as e:
             logging.error(f"An exception occurred: failed to get Spotify ids (Attempt {attempts + 1}/{max_retries})", exc_info=True)
