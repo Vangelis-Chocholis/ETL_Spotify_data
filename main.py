@@ -52,7 +52,7 @@ def database_connection(connection_string, max_retries=5, retry_delay=3):
         retry_delay (int, optional): Number of seconds to delay between retries. Defaults to 3.
 
     Returns:
-        _type_: _description_
+        odbc connection: The connection to the database
     """
     attempts = 0
     while attempts < max_retries:
@@ -60,11 +60,11 @@ def database_connection(connection_string, max_retries=5, retry_delay=3):
             conn = odbc.connect(connection_string)
             return conn
         except Exception as e:
-            logging.error(f"An exception occurred: connect with DB failed (Attempt {attempts + 1}/{max_retries})", exc_info=True)
+            logging.error(f"An exception occurred: connect with DB failed (Attempt {attempts + 1}/{max_retries})", exc_info=False)
             attempts += 1
             time.sleep(retry_delay)
 
-    logging.error(f"Failed to connect to the database after {max_retries} attempts.", exc_info=False)
+    logging.error(f"Failed to connect to the database after {max_retries} attempts. Exception raised: {e}", exc_info=False)
     return None
 
 
@@ -86,11 +86,11 @@ def set_engine(conn, max_retries=5, retry_delay=3):
             engine = create_engine("mssql+pyodbc://", poolclass=StaticPool, creator=lambda: conn)
             return engine
         except Exception as e:
-            logging.error(f"An exception occurred: SQLAlcehmy engine error (Attempt {attempts + 1}/{max_retries})", exc_info=True)
+            logging.error(f"An exception occurred: SQLAlcehmy engine error (Attempt {attempts + 1}/{max_retries})", exc_info=False)
             attempts += 1
             time.sleep(retry_delay)
 
-    logging.error(f"Failed to create the SQLAlchemy engine after {max_retries} attempts.", exc_info=False)
+    logging.error(f"Failed to create the SQLAlchemy engine after {max_retries} attempts. Exception raised: {e}", exc_info=False)
     return None
 
 
@@ -107,27 +107,26 @@ def get_spotify_ids(engine):
     """
     attempts = 0
     max_retries = 3
-    retry_delay = 2
+    retry_delay = 3
     while attempts < max_retries:
         try:
             query = f'SELECT artist_id FROM artists_table'
             artist_ids = pd.read_sql(query, engine)['artist_id'].to_list() 
 
-            #query = f'SELECT album_id FROM albums_table'
-            #album_ids = pd.read_sql(query, engine)['album_id'].to_list() 
+            query = f'SELECT album_id FROM albums_table'
+            album_ids = pd.read_sql(query, engine)['album_id'].to_list() 
 
-            #query = f'SELECT track_id FROM tracks_table'
-            #track_ids = pd.read_sql(query, engine)['track_id'].to_list()
+            query = f'SELECT track_id FROM tracks_table'
+            track_ids = pd.read_sql(query, engine)['track_id'].to_list()
             
-            return artist_ids #, album_ids, track_ids 
+            return artist_ids, album_ids, track_ids 
         
         except Exception as e:
-            logging.error(f"An exception occurred: failed to get Spotify ids (Attempt {attempts + 1}/{max_retries})", exc_info=True)
+            logging.error(f"An exception occurred: failed to get Spotify ids (Attempt {attempts + 1}/{max_retries})", exc_info=False)
             attempts += 1
             time.sleep(retry_delay)
-
     # Log the exception with the logging module
-    logging.error(f"Failed to get Spotify ids  after {max_retries} attempts.", exc_info=False)
+    logging.error(f"Failed to get Spotify ids  after {max_retries} attempts. Exception raised: {e}", exc_info=False)
     return None
     
  
@@ -140,21 +139,20 @@ def load_to_database(engine, tuple_ids):
         tupl_ids (tuple): A tuple of lists of Spotify ids, corresponding to artists, albums and tracks.
     """      
     try:
-        artist_ids = tuple_ids
-        #artist_ids, album_ids, track_ids = tuple_ids
+        artist_ids, album_ids, track_ids = tuple_ids
         
-        #df_artists_followers_table = extract_artists_followers_table(artist_ids=artist_ids)
-        #df_artists_followers_table.to_sql('artists_followers_table', con=engine, if_exists='append', index=False)
+        df_artists_followers_table = extract_artists_followers_table(artist_ids=artist_ids)
+        df_artists_followers_table.to_sql('artists_followers_table', con=engine, if_exists='append', index=False)
 
         df_artists_popularity_table = extract_artists_popularity_table(artist_ids=artist_ids)
         df_artists_popularity_table.to_sql('demo_artists_followers_table', con=engine, if_exists='append', index=False)
 
-        #df_albums_popularity_table = extract_albums_popularity_table(album_ids=album_ids)
-        #df_albums_popularity_table.to_sql('albums_popularity_table', con=engine, if_exists='append', index=False)
+        df_albums_popularity_table = extract_albums_popularity_table(album_ids=album_ids)
+        df_albums_popularity_table.to_sql('albums_popularity_table', con=engine, if_exists='append', index=False)
 
-        #df_tracks_popularity_table = extract_tracks_popularity_table(track_ids=track_ids)
-        #df_tracks_popularity_table.to_sql('tracks_popularity_table', con=engine, if_exists='append', index=False)
-
+        df_tracks_popularity_table = extract_tracks_popularity_table(track_ids=track_ids)
+        df_tracks_popularity_table.to_sql('tracks_popularity_table', con=engine, if_exists='append', index=False)
+        
         # close SQLAlchemy engine
         engine.dispose()
         # close connection
@@ -163,8 +161,8 @@ def load_to_database(engine, tuple_ids):
         # Add a logging statement for successful completion
         logging.info("The database has been updated successfully!")
     except Exception as e:
-        # Log the exception with the logging module
-        logging.error("An exception occurred: Load data into DB", exc_info=True)
+        # Log the exception
+        logging.error("An exception occurred: Failed to load data into the database", exc_info=True)
 
 
 
