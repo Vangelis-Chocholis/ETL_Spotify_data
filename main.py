@@ -145,7 +145,7 @@ def load_to_database(engine, tuple_ids):
         df_artists_followers_table.to_sql('artists_followers_table', con=engine, if_exists='append', index=False)
 
         df_artists_popularity_table = extract_artists_popularity_table(artist_ids=artist_ids)
-        df_artists_popularity_table.to_sql('demo_artists_followers_table', con=engine, if_exists='append', index=False)
+        df_artists_popularity_table.to_sql('artists_popularity_table', con=engine, if_exists='append', index=False)
 
         df_albums_popularity_table = extract_albums_popularity_table(album_ids=album_ids)
         df_albums_popularity_table.to_sql('albums_popularity_table', con=engine, if_exists='append', index=False)
