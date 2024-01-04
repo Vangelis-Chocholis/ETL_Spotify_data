@@ -43,12 +43,12 @@ except Exception as e:
 
 
 # connect to database using pyodbc (without SQLAlchemy)
-def database_connection(connection_string, max_retries=5, retry_delay=3):
+def database_connection(connection_string, max_retries=10, retry_delay=3):
     """Connect to SQL Server using pyodbc
 
     Args:
         connection_string (string): The connection string to the database
-        max_retries (int, optional): Max number of retries. Defaults to 5.
+        max_retries (int, optional): Max number of retries. Defaults to 10.
         retry_delay (int, optional): Number of seconds to delay between retries. Defaults to 3.
 
     Returns:
@@ -60,7 +60,7 @@ def database_connection(connection_string, max_retries=5, retry_delay=3):
             conn = odbc.connect(connection_string)
             return conn
         except Exception as e:
-            logging.error(f"An exception occurred: connect with DB failed (Attempt {attempts + 1}/{max_retries})", exc_info=False)
+            #logging.error(f"An exception occurred: connect with DB failed (Attempt {attempts + 1}/{max_retries})", exc_info=False)
             attempts += 1
             time.sleep(retry_delay)
 
