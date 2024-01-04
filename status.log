@@ -1,1 +1,5 @@
 
+2024-01-04 01:36:06,101 - ERROR - An exception occurred: connect with DB failed (Attempt 1/5)
+2024-01-04 01:36:24,445 - ERROR - An exception occurred: connect with DB failed (Attempt 2/5)
+2024-01-04 01:36:42,789 - ERROR - An exception occurred: connect with DB failed (Attempt 3/5)
+2024-01-04 01:39:10,516 - INFO - The database has been updated successfully!
