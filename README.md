@@ -1,2 +1,2 @@
-# spotify_daily_data_updates
+# ETL_Spotify_data
 ![Alt Text](images/ETL.png)
