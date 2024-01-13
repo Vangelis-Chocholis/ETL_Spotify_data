@@ -35,7 +35,7 @@ try:
     'Pwd=' + password + ';'
     'Encrypt=yes;'
     'TrustServerCertificate=no;'
-    'Connection Timeout=1500;')
+    'Connection Timeout=600;')
     
 except Exception as e:
     logging.error("An exception occurred: Database PASSWORD not found", exc_info=False)
