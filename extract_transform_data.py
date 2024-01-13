@@ -600,9 +600,7 @@ def get_static_tables(artists_list):
         artists_list (list): A list of artists.
 
     Returns:
-        tuple: ever static table in pd.DataFrame form.
-        
-         
+        tuple: ever static table in pd.DataFrame form. 
     """
     # get artists
     artists_table = extract_artists_table(artists_list)
