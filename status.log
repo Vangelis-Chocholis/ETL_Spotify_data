@@ -160,3 +160,74 @@
 2024-06-11 00:49:35,108 - INFO - The database has been updated successfully!
 2024-06-12 00:50:07,213 - INFO - The database has been updated successfully!
 2024-06-13 00:49:30,257 - INFO - The database has been updated successfully!
+2024-06-14 00:49:37,060 - ERROR - Error closing cursor
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pypyodbc.py", line 1617, in execute
+    check_success(self, ret)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pypyodbc.py", line 1007, in check_success
+    ctrl_err(SQL_HANDLE_STMT, ODBC_obj.stmt_h, ret, ODBC_obj.ansi)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pypyodbc.py", line 987, in ctrl_err
+    raise DatabaseError(state,err_text)
+pypyodbc.DatabaseError: ('08S01', '[08S01] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider: Error code 0x68')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2204, in _safe_close_cursor
+    cursor.close()
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pypyodbc.py", line 2372, in close
+    check_success(self, ret)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pypyodbc.py", line 1007, in check_success
+    ctrl_err(SQL_HANDLE_STMT, ODBC_obj.stmt_h, ret, ODBC_obj.ansi)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pypyodbc.py", line 987, in ctrl_err
+    raise DatabaseError(state,err_text)
+pypyodbc.DatabaseError: ('08S01', '[08S01] [Microsoft][ODBC Driver 18 for SQL Server]Communication link failure')
+2024-06-14 00:49:37,061 - ERROR - An exception occurred: Failed to load data into the database
+Traceback (most recent call last):
+  File "/home/runner/work/ETL_Spotify_data/ETL_Spotify_data/main.py", line 152, in load_to_database
+    df_tracks_popularity_table.to_sql('tracks_popularity_table', con=engine, if_exists='append', index=False)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pandas/core/generic.py", line 3008, in to_sql
+    return sql.to_sql(
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 788, in to_sql
+    return pandas_sql.to_sql(
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pandas/io/sql.py", line 1585, in __exit__
+    self.exit_stack.close()
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/contextlib.py", line 540, in close
+    self.__exit__(None, None, None)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/contextlib.py", line 532, in __exit__
+    raise exc_details[1]
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/contextlib.py", line 517, in __exit__
+    if cb(*exc_details):
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/engine/util.py", line 148, in __exit__
+    self.rollback()
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/engine/util.py", line 144, in __exit__
+    self.commit()
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2620, in commit
+    self._do_commit()
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2725, in _do_commit
+    self._connection_commit_impl()
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2696, in _connection_commit_impl
+    self.connection._commit_impl()
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1138, in _commit_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2347, in _handle_dbapi_exception
+    raise exc_info[1].with_traceback(exc_info[2])
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1136, in _commit_impl
+    self.engine.dialect.do_commit(self.connection)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 695, in do_commit
+    dbapi_connection.commit()
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pypyodbc.py", line 2611, in commit
+    check_success(self, ret)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pypyodbc.py", line 1009, in check_success
+    ctrl_err(SQL_HANDLE_DBC, ODBC_obj.dbc_h, ret, ODBC_obj.ansi)
+  File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pypyodbc.py", line 987, in ctrl_err
+    raise DatabaseError(state,err_text)
+pypyodbc.DatabaseError: ('08S01', '[08S01] [Microsoft][ODBC Driver 18 for SQL Server]Communication link failure')
