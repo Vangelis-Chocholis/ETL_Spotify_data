@@ -231,3 +231,4 @@ Traceback (most recent call last):
   File "/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/pypyodbc.py", line 987, in ctrl_err
     raise DatabaseError(state,err_text)
 pypyodbc.DatabaseError: ('08S01', '[08S01] [Microsoft][ODBC Driver 18 for SQL Server]Communication link failure')
+2024-06-15 00:49:29,222 - INFO - The database has been updated successfully!
