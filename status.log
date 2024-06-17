@@ -233,3 +233,4 @@ Traceback (most recent call last):
 pypyodbc.DatabaseError: ('08S01', '[08S01] [Microsoft][ODBC Driver 18 for SQL Server]Communication link failure')
 2024-06-15 00:49:29,222 - INFO - The database has been updated successfully!
 2024-06-16 00:49:46,092 - INFO - The database has been updated successfully!
+2024-06-17 00:49:34,752 - INFO - The database has been updated successfully!
