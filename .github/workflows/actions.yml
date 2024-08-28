@@ -47,7 +47,7 @@ jobs:
         run: python main.py
           
       - name: Upload status.log as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: status-log
           path: status.log
