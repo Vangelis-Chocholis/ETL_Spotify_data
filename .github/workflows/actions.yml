@@ -2,7 +2,8 @@ name: run main.py
 
 on:
   schedule:
-    - cron: '30 0 * * *'  # everyday at 00:30 UTC every day  (02:30 EET)
+    - cron: 30 0 */3 * *  # every 3rd day at 00:30 UTC (02:30 EET)
+
 
 
 
