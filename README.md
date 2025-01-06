@@ -1,6 +1,7 @@
 # Extract-Transform-Load: From Spotify to Azure
 
 
+
 ### Summary:
 For this project, we created a SQL Server database on the cloud using Microsoft Azure. The objective was to extract data for legendary rock 🎸 artists from the Spotify API, transform/clean the data, and then load it into our cloud database, resulting in a database that is automatically updated daily.
 
